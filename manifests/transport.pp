@@ -37,6 +37,9 @@
 # [*headers_rewrite*]
 #  list of headers to rewrite.
 #
+# [*return_path*]
+#  return_path to add.
+#
 # [*hosts*]
 #   The hosts option specifies a list of hosts to be used if the address
 #   being processed does not have any hosts associated with it. The hosts
@@ -98,6 +101,7 @@ define exim::transport (
   $port                    = undef,
   $rcpt_include_affixes    = false,
   $return_output           = false,
+  $return_path             = false,
   $return_path_add         = false,
   $socket                  = undef,
   $subject                 = undef,
@@ -129,6 +133,7 @@ define exim::transport (
   if ($user)                    { validate_re($user                   ,'^.+$') }
   if ($interface)               { validate_re($interface              ,'^.+$') }
   if ($helo_data)               { validate_re($helo_data              ,'^.+$') }
+  if ($return_path)             { validate_re($return_path            ,'^.+$') }
 
   if ($temp_errors)      { validate_array($temp_errors    ) }
   if ($hosts)            { validate_array($hosts          ) }
