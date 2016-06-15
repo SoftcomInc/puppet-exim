@@ -86,6 +86,9 @@ end
 <% unless @headers_add.nil? -%>
   headers_add     = <%= @headers_add.join("\\n") %>
 <% end -%>
+<% unless @headers_rewrite.nil? -%>
+  headers_rewrite = <%= @headers_rewrite.join(":") %>
+<% end -%>
 <% if validate_string(@message_prefix) -%>
   message_prefix  = <%= @message_prefix %>
 <% end -%>

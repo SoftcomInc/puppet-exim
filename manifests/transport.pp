@@ -34,6 +34,9 @@
 # [*headers_add*]
 #  list of headers to add.
 #
+# [*headers_rewrite*]
+#  list of headers to rewrite.
+#
 # [*hosts*]
 #   The hosts option specifies a list of hosts to be used if the address
 #   being processed does not have any hosts associated with it. The hosts
@@ -79,6 +82,7 @@ define exim::transport (
   $group                   = undef,
   $headers_add             = undef,
   $headers_remove          = undef,
+  $headers_rewrite         = undef,
   $helo_data               = undef,
   $home_directory          = undef,
   $hosts_require_tls       = undef,
@@ -126,11 +130,12 @@ define exim::transport (
   if ($interface)               { validate_re($interface              ,'^.+$') }
   if ($helo_data)               { validate_re($helo_data              ,'^.+$') }
 
-  if ($temp_errors)      { validate_array($temp_errors   ) }
-  if ($hosts)            { validate_array($hosts         ) }
-  if ($headers_remove)   { validate_array($headers_remove) }
-  if ($headers_add)      { validate_array($headers_add   ) }
-  if ($fallback_hosts)   { validate_array($fallback_hosts) }
+  if ($temp_errors)      { validate_array($temp_errors    ) }
+  if ($hosts)            { validate_array($hosts          ) }
+  if ($headers_remove)   { validate_array($headers_remove ) }
+  if ($headers_add)      { validate_array($headers_add    ) }
+  if ($headers_rewrite)  { validate_array($headers_rewrite) }
+  if ($fallback_hosts)   { validate_array($fallback_hosts ) }
   if ($hosts_require_tls){ validate_array($hosts_require_tls)}
 
   if ($batch_max)               { validate_re("x${batch_max}"               ,'^x[0-9]+$') }
